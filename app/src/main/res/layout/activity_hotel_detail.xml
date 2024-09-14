@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_app"
+    tools:context=".HotelDetail">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:cardCornerRadius="15dp"
+                app:contentPadding="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="15dp">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="280dp"
+                            android:scaleType="fitXY"
+                            app:srcCompat="@drawable/hotel1" />
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lexend_extrabold"
+                        android:gravity="start"
+                        android:paddingLeft="10dp"
+                        android:text="Novotel Bangka Hotel"
+                        android:textColor="@color/title"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginLeft="10dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            app:srcCompat="@drawable/location" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/lexend"
+                            android:text="Pangkalpinang" />
+
+                    </LinearLayout>
+
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend"
+                        android:gravity="start"
+                        android:paddingLeft="10dp"
+                        android:text="Mulai dari"
+                        android:textColor="@color/black"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend_bold"
+                        android:gravity="start"
+                        android:paddingLeft="10dp"
+                        android:text="Rp. 786.000"
+                        android:textColor="@color/red"
+                        android:textSize="25dp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend_light"
+                        android:gravity="start"
+                        android:paddingLeft="10dp"
+                        android:text="/kamar/malam"
+                        android:textColor="@color/black"
+                        android:textSize="14dp" />
+
+                    <TextView
+                        android:id="@+id/sda"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:fontFamily="@font/lexend_medium"
+                        android:gravity="start"
+                        android:paddingLeft="10dp"
+                        android:text="Deskripsi"
+                        android:textColor="@color/black"
+                        android:textSize="21dp" />
+
+                    <TextView
+                        android:id="@+id/textVie2w2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/lexend_light"
+                        android:gravity="start"
+                        android:paddingLeft="10dp"
+                        android:text="Berlokasi strategis cukup dengan 12 menit berkendara dari kota Pangkalpinang, Novotel Bangka Hotel and Convention Centre memiliki kamar-kamar ber-AC, kolam renang outdoor, pusat kebugaran, spa, restoran dan dua bar. Akses WiFi gratis tersedia di semua kamar dan di seluruh area hotel.
+Semua kamar dilengkapi TV layar datar, mesin pembuat kopi, area tempat duduk dan meja kerja. Kamar mandi dalam dilengkapi dengan shower, peralatan mandi gratis, pengering rambut dan handuk. Suite juga tersedia dan memiliki area lounge terpisah dan bathtub. "
+                        android:textColor="@color/black"
+                        android:textSize="16dp" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="Book Now"
+                        android:textColor="@color/white"
+                        android:background="@drawable/button"/>
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
