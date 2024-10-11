@@ -8,7 +8,7 @@
     android:background="@drawable/background_app"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".food">
+    tools:context=".FoodActivity">
 
 
     <TextView
@@ -42,6 +42,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvFood"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:itemCount="3"

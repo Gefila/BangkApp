@@ -28,13 +28,13 @@
             android:name=".FoodDetail"
             android:exported="false" />
         <activity
-            android:name=".food"
+            android:name=".FoodActivity"
             android:exported="false" />
         <activity
-            android:name=".login"
+            android:name=".Login"
             android:exported="false" />
         <activity
-            android:name=".home"
+            android:name=".Home"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

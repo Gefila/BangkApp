@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class home : AppCompatActivity() {
+class Home : AppCompatActivity() {
 
     private lateinit var cardFood:CardView
     private lateinit var cardHotel:CardView
@@ -33,7 +33,7 @@ class home : AppCompatActivity() {
         initComponent()
 
         cardFood.setOnClickListener {
-            val intent = Intent(this,food::class.java)
+            val intent = Intent(this,FoodActivity::class.java)
             startActivity(intent)
         }
 

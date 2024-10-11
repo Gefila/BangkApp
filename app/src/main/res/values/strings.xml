@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">BangkApp</string>
+    <string name="price">Rp %s</string>
 </resources>

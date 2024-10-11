@@ -2,7 +2,6 @@ package com.example.bangkapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -12,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
-class login : AppCompatActivity() {
+class Login : AppCompatActivity() {
     private lateinit var loginButton: Button
     private lateinit var inputEmail: EditText
     private lateinit var inputPassword: EditText
@@ -46,7 +45,7 @@ class login : AppCompatActivity() {
             }
             if (username == userEmail && password == userPassword) {
                 Toast.makeText(this, "Selamat Datang $username", Toast.LENGTH_LONG).show()
-                val intent = Intent(this, home::class.java)
+                val intent = Intent(this, Home::class.java)
                 startActivity(intent)
             }else{
                 Toast.makeText(this, "Email atau Password Salah", Toast.LENGTH_LONG).show()
