@@ -16,12 +16,14 @@ class Login : AppCompatActivity() {
     private lateinit var inputEmail: EditText
     private lateinit var inputPassword: EditText
     private lateinit var notifError: TextView
+    private lateinit var withoutLogin: Button
 
     private fun initComponent() {
         loginButton = findViewById(R.id.loginBtn)
         inputEmail = findViewById(R.id.inputEmail)
         inputPassword = findViewById(R.id.inputPassword)
         notifError = findViewById(R.id.notifError)
+        withoutLogin = findViewById(R.id.withoutLoginBtn)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,12 +47,16 @@ class Login : AppCompatActivity() {
             }
             if (username == userEmail && password == userPassword) {
                 Toast.makeText(this, "Selamat Datang $username", Toast.LENGTH_LONG).show()
-                val intent = Intent(this, Home::class.java)
+                val intent = Intent(this, HomeActivity::class.java)
                 startActivity(intent)
             }else{
                 Toast.makeText(this, "Email atau Password Salah", Toast.LENGTH_LONG).show()
             }
+        }
 
+        withoutLogin.setOnClickListener {
+            val intent = Intent(this, HomeActivity::class.java)
+            startActivity(intent)
         }
     }
 }
