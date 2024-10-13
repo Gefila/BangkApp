@@ -3,6 +3,7 @@ package com.example.bangkapp
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -28,7 +29,12 @@ class FoodActivity : AppCompatActivity() {
             Food("Salad", "Salad description", 50000),
         )
 
-        val foodAdapter = FoodAdapter(foods)
+        val foodAdapter = FoodAdapter(foods, object : FoodAdapter.OnItemClickListener{
+            override fun onItemClick(food: Food) {
+                Toast.makeText(this@FoodActivity, "You clicked on ${food.name}", Toast.LENGTH_SHORT).show()
+            }
+        })
+
         findViewById<RecyclerView>(R.id.rvFood).apply {
             layoutManager = LinearLayoutManager(this@FoodActivity)
             adapter = foodAdapter
@@ -36,10 +42,10 @@ class FoodActivity : AppCompatActivity() {
 
     }
 
-    fun moveToDetailFood (view: View) {
-        val intent = Intent(this, FoodDetail::class.java)
-        startActivity(intent)
-    }
+//    fun moveToDetailFood (view: View) {
+//        val intent = Intent(this, FoodDetail::class.java)
+//        startActivity(intent)
+//    }
 
 
 }
