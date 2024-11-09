@@ -7,4 +7,5 @@
     <color name="blue">#FF0000FF</color>
     <color name="background">#D4FBFF</color>
     <color name="title">#1E8BFF</color>
+    <color name="shimmerColor">#595959</color>
 </resources>

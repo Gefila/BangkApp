@@ -2,6 +2,7 @@ package com.example.bangkapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -11,6 +12,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.facebook.shimmer.Shimmer
+import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +22,10 @@ class FoodActivity : AppCompatActivity() {
 
     private var foods: List<Food> = emptyList()
     private lateinit var foodAdapter: FoodAdapter
+    private lateinit var shimmerLayout: ShimmerFrameLayout
+    private lateinit var handler: Handler
+    private lateinit var runnable: Runnable
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +37,9 @@ class FoodActivity : AppCompatActivity() {
             insets
         }
 
+        shimmerLayout = findViewById<ShimmerFrameLayout>(R.id.shimmerLayout)
+        shimmerLayout.startShimmer()
+
         foodAdapter = FoodAdapter(foods, object : FoodAdapter.OnItemClickListener{
             override fun onItemClick(food: Food) {
                 Toast.makeText(this@FoodActivity, "You clicked on ${food.name}", Toast.LENGTH_SHORT).show()
@@ -40,6 +50,7 @@ class FoodActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@FoodActivity)
             adapter = foodAdapter
         }
+        handler = Handler(mainLooper)
         getFood()
     }
 
@@ -47,6 +58,8 @@ class FoodActivity : AppCompatActivity() {
         RetrofitClient.foodService.getFood().enqueue(object : Callback<List<Food>> {
             override fun onResponse(call: Call<List<Food>>, response: Response<List<Food>>) {
                 if(response.isSuccessful){
+                    shimmerLayout.stopShimmer()
+                    shimmerLayout.visibility = View.GONE
                     val foods = response.body()
                     if(foods != null){
                         foodAdapter.updateData(foods)
@@ -56,12 +69,19 @@ class FoodActivity : AppCompatActivity() {
 
             override fun onFailure(call: Call<List<Food>>, t: Throwable) {
                 Log.d("FoodActivity", "onFailure: ${t.message}")
+                Toast.makeText(this@FoodActivity, "Error: ${t.message}", Toast.LENGTH_SHORT).show()
+                runnable = Runnable {
+                    getFood()
+                }
+                handler.postDelayed(runnable, 3000)
             }
-
         })
     }
 
-
+    override fun onDestroy() {
+        super.onDestroy()
+        handler.removeCallbacks(runnable)
+    }
 
 
 
