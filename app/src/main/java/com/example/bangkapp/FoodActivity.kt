@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,6 +41,32 @@ class FoodActivity : AppCompatActivity() {
         shimmerLayout = findViewById<ShimmerFrameLayout>(R.id.shimmerLayout)
         shimmerLayout.startShimmer()
 
+        val foodSearch = findViewById<SearchView>(R.id.foodSearch)
+        foodSearch.clearFocus()
+        foodSearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                foodSearch.clearFocus()
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                val searchText = newText!!.toLowerCase()
+
+                val searchList = if(searchText.isNotEmpty()){
+                    foods.filter { food ->
+                        food.name.toLowerCase().contains(searchText)
+                    }
+                }else{
+                    foods
+                }
+
+                foodAdapter.updateData(searchList)
+
+                return false
+            }
+
+        })
+
         foodAdapter = FoodAdapter(foods, object : FoodAdapter.OnItemClickListener{
             override fun onItemClick(food: Food) {
                 Toast.makeText(this@FoodActivity, "You clicked on ${food.name}", Toast.LENGTH_SHORT).show()
@@ -60,7 +87,7 @@ class FoodActivity : AppCompatActivity() {
                 if(response.isSuccessful){
                     shimmerLayout.stopShimmer()
                     shimmerLayout.visibility = View.GONE
-                    val foods = response.body()
+                    foods = response.body() ?: emptyList()
                     if(foods != null){
                         foodAdapter.updateData(foods)
                     }
