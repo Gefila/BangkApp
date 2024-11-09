@@ -17,7 +17,8 @@ import retrofit2.Response
 
 class FoodActivity : AppCompatActivity() {
 
-    private lateinit var foods: List<Food>
+    private var foods: List<Food> = emptyList()
+    private lateinit var foodAdapter: FoodAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,16 +30,7 @@ class FoodActivity : AppCompatActivity() {
             insets
         }
 
-        //dummy data
-        var foods = listOf<Food>(
-            Food("Pizza", "Pizza description", 10000),
-            Food("Burger", "Burger description", 20000),
-            Food("Sushi", "Sushi description", 30000),
-            Food("Steak", "Steak description", 40000),
-            Food("Salad", "Salad description", 50000),
-        )
-
-        val foodAdapter = FoodAdapter(foods, object : FoodAdapter.OnItemClickListener{
+        foodAdapter = FoodAdapter(foods, object : FoodAdapter.OnItemClickListener{
             override fun onItemClick(food: Food) {
                 Toast.makeText(this@FoodActivity, "You clicked on ${food.name}", Toast.LENGTH_SHORT).show()
             }
@@ -56,6 +48,9 @@ class FoodActivity : AppCompatActivity() {
             override fun onResponse(call: Call<List<Food>>, response: Response<List<Food>>) {
                 if(response.isSuccessful){
                     val foods = response.body()
+                    if(foods != null){
+                        foodAdapter.updateData(foods)
+                    }
                 }
             }
 
