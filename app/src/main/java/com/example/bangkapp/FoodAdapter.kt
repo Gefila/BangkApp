@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class FoodAdapter(val foodList: List<Food>, val listener: OnItemClickListener): RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
+class FoodAdapter(var foodList: List<Food>, val listener: OnItemClickListener): RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
     class FoodViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val foodName = itemView.findViewById<TextView>(R.id.foodName)
         val foodDescription = itemView.findViewById<TextView>(R.id.foodDescription)
@@ -29,6 +29,11 @@ class FoodAdapter(val foodList: List<Food>, val listener: OnItemClickListener): 
 
     override fun getItemCount(): Int {
         return foodList.size
+    }
+
+    fun updateData(newFoodList: List<Food>) {
+        foodList = newFoodList
+        notifyDataSetChanged()
     }
 
     interface OnItemClickListener {

@@ -2,6 +2,7 @@ package com.example.bangkapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -10,8 +11,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class FoodActivity : AppCompatActivity() {
+
+    private lateinit var foods: List<Food>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -21,7 +28,9 @@ class FoodActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val foods = listOf<Food>(
+
+        //dummy data
+        var foods = listOf<Food>(
             Food("Pizza", "Pizza description", 10000),
             Food("Burger", "Burger description", 20000),
             Food("Sushi", "Sushi description", 30000),
@@ -39,13 +48,26 @@ class FoodActivity : AppCompatActivity() {
             layoutManager = LinearLayoutManager(this@FoodActivity)
             adapter = foodAdapter
         }
-
+        getFood()
     }
 
-//    fun moveToDetailFood (view: View) {
-//        val intent = Intent(this, FoodDetail::class.java)
-//        startActivity(intent)
-//    }
+    fun getFood(){
+        RetrofitClient.foodService.getFood().enqueue(object : Callback<List<Food>> {
+            override fun onResponse(call: Call<List<Food>>, response: Response<List<Food>>) {
+                if(response.isSuccessful){
+                    val foods = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<List<Food>>, t: Throwable) {
+                Log.d("FoodActivity", "onFailure: ${t.message}")
+            }
+
+        })
+    }
+
+
+
 
 
 }
