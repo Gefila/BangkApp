@@ -8,6 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import java.text.NumberFormat
+import java.util.Locale
 
 class FoodAdapter(var foodList: List<Food>, val listener: OnItemClickListener): RecyclerView.Adapter<FoodAdapter.FoodViewHolder>() {
     class FoodViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
@@ -23,9 +25,10 @@ class FoodAdapter(var foodList: List<Food>, val listener: OnItemClickListener): 
 
     override fun onBindViewHolder(holder: FoodAdapter.FoodViewHolder, position: Int) {
         val food = foodList[position]
+        val priceFormatted = NumberFormat.getCurrencyInstance(Locale("id", "ID")).format(food.price).replace(",00", "")
         holder.foodName.text = food.name
         holder.foodDescription.text = food.description
-        holder.foodPrice.text = holder.itemView.context.getString(R.string.price, food.price.toString())
+        holder.foodPrice.text = priceFormatted
         Glide.with(holder.itemView.context).load(food.image).into(holder.foodImage)
         holder.itemView.setOnClickListener {
             listener.onItemClick(food)

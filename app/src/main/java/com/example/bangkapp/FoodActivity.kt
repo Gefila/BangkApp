@@ -107,9 +107,9 @@ class FoodActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        handler.removeCallbacks(runnable)
+        if (::runnable.isInitialized) {
+            handler.removeCallbacks(runnable)
+        }
     }
-
-
 
 }
