@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bangkapp.databinding.ActivityFoodBinding
 import com.facebook.shimmer.Shimmer
 import com.facebook.shimmer.ShimmerFrameLayout
 import retrofit2.Call
@@ -22,8 +23,8 @@ import retrofit2.Response
 class FoodActivity : AppCompatActivity() {
 
     private var foods: List<Food> = emptyList()
+    private lateinit var binding: ActivityFoodBinding
     private lateinit var foodAdapter: FoodAdapter
-    private lateinit var shimmerLayout: ShimmerFrameLayout
     private lateinit var handler: Handler
     private lateinit var runnable: Runnable
 
@@ -31,17 +32,17 @@ class FoodActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_food)
+        binding = ActivityFoodBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
-        shimmerLayout = findViewById<ShimmerFrameLayout>(R.id.shimmerLayout)
-        shimmerLayout.startShimmer()
+        binding.shimmerLayout.startShimmer()
 
-        val foodSearch = findViewById<SearchView>(R.id.foodSearch)
+        val foodSearch = binding.foodSearch
         foodSearch.clearFocus()
         foodSearch.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -59,7 +60,6 @@ class FoodActivity : AppCompatActivity() {
                 }else{
                     foods
                 }
-
                 foodAdapter.updateData(searchList)
 
                 return false
@@ -73,7 +73,7 @@ class FoodActivity : AppCompatActivity() {
             }
         })
 
-        findViewById<RecyclerView>(R.id.rvFood).apply {
+        binding.rvFood.apply {
             layoutManager = LinearLayoutManager(this@FoodActivity)
             adapter = foodAdapter
         }
@@ -85,8 +85,8 @@ class FoodActivity : AppCompatActivity() {
         RetrofitClient.foodService.getFood().enqueue(object : Callback<List<Food>> {
             override fun onResponse(call: Call<List<Food>>, response: Response<List<Food>>) {
                 if(response.isSuccessful){
-                    shimmerLayout.stopShimmer()
-                    shimmerLayout.visibility = View.GONE
+                    binding.shimmerLayout.stopShimmer()
+                    binding.shimmerLayout.visibility = View.GONE
                     foods = response.body() ?: emptyList()
                     if(foods != null){
                         foodAdapter.updateData(foods)

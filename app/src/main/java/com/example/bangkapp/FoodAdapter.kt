@@ -26,7 +26,7 @@ class FoodAdapter(var foodList: List<Food>, val listener: OnItemClickListener): 
         holder.foodName.text = food.name
         holder.foodDescription.text = food.description
         holder.foodPrice.text = holder.itemView.context.getString(R.string.price, food.price.toString())
-        Glide.with(holder.itemView.context).load(food.image).centerCrop().into(holder.foodImage)
+        Glide.with(holder.itemView.context).load(food.image).into(holder.foodImage)
         holder.itemView.setOnClickListener {
             listener.onItemClick(food)
         }

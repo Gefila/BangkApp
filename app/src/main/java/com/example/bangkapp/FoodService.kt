@@ -5,7 +5,7 @@ import retrofit2.http.GET
 
 interface FoodService {
     //read
-    @GET("food.php")
+    @GET("food")
     fun getFood(): Call<List<Food>>
 
 }
