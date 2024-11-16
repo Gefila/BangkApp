@@ -8,4 +8,5 @@
     <color name="background">#D4FBFF</color>
     <color name="title">#1E8BFF</color>
     <color name="shimmerColor">#595959</color>
+    <color name="dot">#3693FF</color>
 </resources>

@@ -57,6 +57,11 @@ dependencies {
     //glide
     implementation ("com.github.bumptech.glide:glide:4.15.1")
 
+    //shimmer
     implementation ("com.facebook.shimmer:shimmer:0.5.0")
+
+    //dots indicator
+    implementation("com.tbuonomo:dotsindicator:5.0")
+
 
 }

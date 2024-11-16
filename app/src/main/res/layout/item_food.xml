@@ -75,6 +75,8 @@
                     android:layout_marginBottom="5dp"
                     android:fontFamily="@font/lexend"
                     android:textSize="13sp"
+                    android:maxLines="2"
+                    android:ellipsize="end"
                     android:text="Sup ikan dengan bumbu kunyit." />
 
                 <TextView
