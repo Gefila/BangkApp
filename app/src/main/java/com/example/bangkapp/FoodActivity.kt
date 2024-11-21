@@ -69,7 +69,9 @@ class FoodActivity : AppCompatActivity() {
 
         foodAdapter = FoodAdapter(foods, object : FoodAdapter.OnItemClickListener{
             override fun onItemClick(food: Food) {
-                Toast.makeText(this@FoodActivity, "You clicked on ${food.name}", Toast.LENGTH_SHORT).show()
+                val intent = Intent(this@FoodActivity, FoodDetail::class.java)
+                intent.putExtra("food", food)
+                startActivity(intent)
             }
         })
 

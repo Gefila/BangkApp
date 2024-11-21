@@ -49,7 +49,7 @@ class HomeActivity : AppCompatActivity() {
         runnable = object :Runnable{
             var index = 0
             override fun run() {
-                if(index == imageList.size){
+                if(index >= imageList.size){
                     index = 0
                 }
                 binding.imageSlider.setCurrentItem(index, true)
