@@ -18,4 +18,8 @@ object RetrofitClient {
         instance.create(FoodService::class.java)
     }
 
+    val informationService: InformationService by lazy {
+        instance.create(InformationService::class.java)
+    }
+
 }

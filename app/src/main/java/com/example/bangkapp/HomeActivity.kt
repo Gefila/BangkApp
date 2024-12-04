@@ -71,7 +71,7 @@ class HomeActivity : AppCompatActivity() {
         }
 
         binding.hotel.setOnClickListener {
-            val intent = Intent(this,Hotel::class.java)
+            val intent = Intent(this,InformationActivity::class.java)
             startActivity(intent)
         }
 
