@@ -1,5 +1,6 @@
 package com.example.bangkapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -36,6 +37,11 @@ class InformationFragment : Fragment() {
             adapter = informationAdapter
         }
         getInformation()
+
+        binding.addInformation.setOnClickListener {
+            val intent = Intent(requireContext(), AddInformationActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     fun getInformation() {
