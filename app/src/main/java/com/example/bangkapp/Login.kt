@@ -47,7 +47,7 @@ class Login : AppCompatActivity() {
             }
             if (username == userEmail && password == userPassword) {
                 Toast.makeText(this, "Selamat Datang $username", Toast.LENGTH_LONG).show()
-                val intent = Intent(this, HomeActivity::class.java)
+                val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
             }else{
                 Toast.makeText(this, "Email atau Password Salah", Toast.LENGTH_LONG).show()
@@ -55,7 +55,7 @@ class Login : AppCompatActivity() {
         }
 
         withoutLogin.setOnClickListener {
-            val intent = Intent(this, HomeActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }

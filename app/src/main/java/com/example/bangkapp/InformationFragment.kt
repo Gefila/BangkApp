@@ -1,37 +1,38 @@
 package com.example.bangkapp
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bangkapp.databinding.ActivityInformationBinding
+import com.example.bangkapp.databinding.FragmentHomeBinding
+import com.example.bangkapp.databinding.FragmentInformationBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class InformationActivity : AppCompatActivity() {
+class InformationFragment : Fragment() {
+    private var _binding: FragmentInformationBinding? = null
+    private val binding get() = _binding!!
 
-    private lateinit var binding: ActivityInformationBinding
     private lateinit var informationAdapter: InformationAdapter
     private var informationList: List<Information> = emptyList()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        binding = ActivityInformationBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentInformationBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         informationAdapter = InformationAdapter(emptyList())
         binding.rvInformation.apply {
-            layoutManager = LinearLayoutManager(this@InformationActivity)
+            layoutManager = LinearLayoutManager(requireContext())
             adapter = informationAdapter
         }
         getInformation()
@@ -52,7 +53,7 @@ class InformationActivity : AppCompatActivity() {
 
                 override fun onFailure(call: Call<List<Information>>, t: Throwable) {
                     Toast.makeText(
-                        this@InformationActivity,
+                        requireContext(),
                         "Error: ${t.message}",
                         Toast.LENGTH_SHORT
                     ).show()
@@ -60,4 +61,10 @@ class InformationActivity : AppCompatActivity() {
 
             })
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
 }

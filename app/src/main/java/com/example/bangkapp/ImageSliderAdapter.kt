@@ -6,7 +6,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
-import com.example.bangkapp.databinding.ActivityHomeBinding
 import com.example.bangkapp.databinding.ItemImageSliderBinding
 
 class ImageSliderAdapter(private val imageList: List<ImageSliderData>): RecyclerView.Adapter<ImageSliderAdapter.ImageViewHolder>() {
