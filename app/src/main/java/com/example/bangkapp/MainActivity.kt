@@ -28,7 +28,10 @@ class MainActivity : AppCompatActivity() {
         val whislistFragment = WhislistFragment()
         val informationFragment = InformationFragment()
 
-        setCurrentFragment(homeFragment)
+        if (savedInstanceState == null) {
+            setCurrentFragment(homeFragment)
+        }
+
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
                 R.id.home -> setCurrentFragment(homeFragment)
