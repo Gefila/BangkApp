@@ -33,12 +33,10 @@ class AddInformationActivity : AppCompatActivity() {
             if (username.isNotEmpty() && comment.isNotEmpty()) {
                 val information = Information("email", username, comment)
                 addInformation(information)
-                val informationFragment = InformationFragment()
-                supportFragmentManager.beginTransaction().apply {
-                    replace(R.id.fragmentContainer, informationFragment)
-                    addToBackStack(null)
-                    commit()
-                }
+                val intent = Intent(this@AddInformationActivity, MainActivity::class.java)
+                intent.putExtra("targetFragment", "informationFragment")
+                startActivity(intent)
+                finish()
             }
         }
     }

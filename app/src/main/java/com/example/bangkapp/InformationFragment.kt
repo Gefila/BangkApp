@@ -58,11 +58,13 @@ class InformationFragment : Fragment() {
                 }
 
                 override fun onFailure(call: Call<List<Information>>, t: Throwable) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Error: ${t.message}",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    if(isAdded){
+                        Toast.makeText(
+                            requireContext(),
+                            "Error: ${t.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
 
             })

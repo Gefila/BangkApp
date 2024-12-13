@@ -28,9 +28,24 @@ class MainActivity : AppCompatActivity() {
         val whislistFragment = WhislistFragment()
         val informationFragment = InformationFragment()
 
-        if (savedInstanceState == null) {
-            setCurrentFragment(homeFragment)
+        val targetFragment = intent.getStringExtra("targetFragment") ?: "homeFragment"
+
+        when (targetFragment) {
+            "homeFragment" -> {
+                setCurrentFragment(homeFragment)
+                binding.bottomNavigationView.selectedItemId = R.id.home
+            }
+            "whislistFragment" -> {
+                setCurrentFragment(whislistFragment)
+                binding.bottomNavigationView.selectedItemId = R.id.whislist
+            }
+            "informationFragment" -> {
+                setCurrentFragment(informationFragment)
+                binding.bottomNavigationView.selectedItemId = R.id.information
+            }
         }
+
+
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when (it.itemId) {
