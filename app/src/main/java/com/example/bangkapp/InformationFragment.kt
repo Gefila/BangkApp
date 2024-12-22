@@ -2,14 +2,12 @@ package com.example.bangkapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.bangkapp.databinding.FragmentHomeBinding
 import com.example.bangkapp.databinding.FragmentInformationBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -34,7 +32,7 @@ class InformationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         informationAdapter = InformationAdapter(emptyList(), object :InformationAdapter.onItemClickListener{
             override fun onItemClick(information: Information) {
-                val intent = Intent(requireContext(), InformationDetailActivity::class.java)
+                val intent = Intent(requireContext(), InformationRepliesActivity::class.java)
                 intent.putExtra("information", information)
                 startActivity(intent)
             }

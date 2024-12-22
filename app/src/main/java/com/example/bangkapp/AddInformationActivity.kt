@@ -31,7 +31,7 @@ class AddInformationActivity : AppCompatActivity() {
             val comment = binding.inputComment.text.toString()
 
             if (username.isNotEmpty() && comment.isNotEmpty()) {
-                val information = Information("email", username, comment)
+                val information = Information(null,"email", username, comment)
                 addInformation(information)
                 val intent = Intent(this@AddInformationActivity, MainActivity::class.java)
                 intent.putExtra("targetFragment", "informationFragment")

@@ -22,4 +22,9 @@ object RetrofitClient {
         instance.create(InformationService::class.java)
     }
 
+    val informationRepliesService: InformationService by lazy {
+        instance.create(InformationService::class.java)
+    }
+
+
 }
