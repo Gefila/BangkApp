@@ -35,6 +35,7 @@ class AddInformationActivity : AppCompatActivity() {
                 addInformation(information)
                 val intent = Intent(this@AddInformationActivity, MainActivity::class.java)
                 intent.putExtra("targetFragment", "informationFragment")
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)
                 finish()
             }
