@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class InformationAdapter(var informationList: List<Information>): RecyclerView.Adapter<InformationAdapter.InformationViewHolder>() {
+class InformationAdapter(var informationList: List<Information>, val listener: onItemClickListener): RecyclerView.Adapter<InformationAdapter.InformationViewHolder>() {
     class InformationViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
         val username = itemView.findViewById<TextView>(R.id.informationUsername)
         val comment = itemView.findViewById<TextView>(R.id.informationComment)
@@ -24,6 +24,9 @@ class InformationAdapter(var informationList: List<Information>): RecyclerView.A
         val information = informationList[position]
         holder.username.text = information.username
         holder.comment.text = information.comment
+        holder.itemView.setOnClickListener {
+            listener.onItemClick(information)
+        }
     }
 
     override fun getItemCount(): Int = informationList.size
@@ -31,6 +34,10 @@ class InformationAdapter(var informationList: List<Information>): RecyclerView.A
     fun updateData(newInformationList: List<Information>) {
         informationList = newInformationList
         notifyDataSetChanged()
+    }
+
+    interface onItemClickListener{
+        fun onItemClick(information: Information)
     }
 
 
