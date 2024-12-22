@@ -17,6 +17,7 @@ class InformationRepliesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityInformationDetailBinding
     private lateinit var informationRepliesAdapter: InformationRepliesAdapter
     private var informationRepliesList: List<InformationReplies> = emptyList()
+    private var information: Information? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +29,10 @@ class InformationRepliesActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        val information = intent.getParcelableExtra<Information>("information")
+        information = intent.getParcelableExtra<Information>("information")
         if (information != null) {
-            binding.informationDetailUsername.text = information.username
-            binding.informationDetailComment.text = information.comment
+            binding.informationDetailUsername.text = information!!.username
+            binding.informationDetailComment.text = information!!.comment
             Log.d("InformationReplies", "Username: ${information}")
         }
         informationRepliesAdapter = InformationRepliesAdapter(emptyList())
@@ -47,7 +48,6 @@ class InformationRepliesActivity : AppCompatActivity() {
             if (username.isNotEmpty() && comment.isNotEmpty()) {
                 val informationReplies = InformationReplies(information?.id, username, "email", comment)
                 addInformationReplies(informationReplies)
-                getInformationReplies(information?.id ?: 0)
             }
         }
 
@@ -87,6 +87,12 @@ class InformationRepliesActivity : AppCompatActivity() {
             ) {
                 if (response.isSuccessful) {
                     val addedInformationReplies = response.body()
+                    Toast.makeText(
+                        this@InformationRepliesActivity,
+                        "Information added successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                    getInformationReplies(information?.id ?: 0)
                 }
             }
 
