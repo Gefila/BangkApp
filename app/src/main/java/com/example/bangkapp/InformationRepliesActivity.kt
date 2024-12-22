@@ -40,7 +40,19 @@ class InformationRepliesActivity : AppCompatActivity() {
             adapter = informationRepliesAdapter
         }
 
+
+        binding.btnAddReplies.setOnClickListener {
+            val username = binding.inputUsername.text.toString()
+            val comment = binding.inputComment.text.toString()
+            if (username.isNotEmpty() && comment.isNotEmpty()) {
+                val informationReplies = InformationReplies(information?.id, username, "email", comment)
+                addInformationReplies(informationReplies)
+                getInformationReplies(information?.id ?: 0)
+            }
+        }
+
         getInformationReplies(information?.id ?: 0)
+
 
     }
 
@@ -63,6 +75,29 @@ class InformationRepliesActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             }
+
+        })
+    }
+
+    fun addInformationReplies(informationReplies: InformationReplies){
+        RetrofitClient.informationRepliesService.addInformationReplies(informationReplies).enqueue(object : Callback<InformationReplies> {
+            override fun onResponse(
+                call: Call<InformationReplies>,
+                response: Response<InformationReplies>
+            ) {
+                if (response.isSuccessful) {
+                    val addedInformationReplies = response.body()
+                }
+            }
+
+            override fun onFailure(call: Call<InformationReplies>, t: Throwable) {
+                Toast.makeText(
+                    this@InformationRepliesActivity,
+                    "Error: ${t.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+
 
         })
     }

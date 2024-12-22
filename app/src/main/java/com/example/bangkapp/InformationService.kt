@@ -16,4 +16,8 @@ interface InformationService {
     @POST("information")
     fun addInformation(@Body information: Information): Call<Information>
 
+    @POST("information/replies/")
+    fun addInformationReplies(@Body informationReplies: InformationReplies): Call<InformationReplies>
+
+
 }
